@@ -10,7 +10,7 @@ describe('application logic', () => {
 
   // ..
 
-  describe( 'setNiggers', () => {
+  describe( 'vote', () => {
 
     it('adds the entries to the state', () => {
       const initialState = fromJS({});
@@ -23,7 +23,7 @@ describe('application logic', () => {
     });
     it('takes the next...',() => {
       const initialState = fromJS({
-        niggers: fromJS( 'Jamal','Jaquan','Sunshine' )
+          niggers:['Jamal','Jaquan','Sunshine']
       });
       const nextState = next(initialState);
       expect(nextState).to.equal(fromJS({

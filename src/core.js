@@ -8,7 +8,7 @@ export const next = (initialState) => {
     vote: fromJS({pair: niggers.take(2)}),
     niggers: niggers.skip(2)
   })
-};
+}; 
 
 export const addNigger = ( currentState, nuNigger) => {
   return currentState.update( 'niggers', niggers => niggers.push(nuNigger));
