@@ -20,9 +20,10 @@ describe('application logic', () => {
             'Jamal',
             'Jaquan',
           ],
+          entries[],
         },
       });
-      const nextState = vote(initialState, 'Jamal');
+      const nextState = vote(initialState, 'Jamal',);
       expect(nextState).to.equal(
         fromJS({
           vote:{
