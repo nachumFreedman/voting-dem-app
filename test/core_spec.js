@@ -14,45 +14,46 @@ describe('application logic', () => {
   describe( 'vote', () => {
 
     it('crates a tally for the voted entry', () => {
-      const state = fromJS({
+      const initialState = fromJS({
         vote:{
           pair:[
             'Jamal',
             'Jaquan',
-          ]},
-        });
-        const nextState = vote(state, 'Jamal')
-        expect(nextState).to.equal(
-          fromJS({
-            vote:{
-              pair:[
-                'Jamal',
-                'Jaquan',
-              ],
-              tally:{
-                'Jamal':1
-              }
-            },
-            entries:[],
-          })
-        );
+          ]
+        },
       })
-      it('adds to existing tally for the voted entry', () => {
-        const initialState = fromJS({
+      const nextState = vote(initialState, 'Jamal')
+      expect(nextState).to.equal(
+        fromJS({
           vote:{
             pair:[
               'Jamal',
               'Jaquan',
             ],
             tally:{
-              'Jamal':3,
-              'Jaquan':2,
+              'Jamal':1
             }
           },
           entries:[],
         })
-      });
-      const nextState = vote(state,'Jamal');
+      );
+    });
+
+    it('adds to existing tally for the voted entry', () => {
+      const initialState = fromJS({
+        vote:{
+          pair:[
+            'Jamal',
+            'Jaquan',
+          ],
+          tally:{
+            'Jamal':3,
+            'Jaquan':2,
+          }
+        },
+        entries:[],
+      })
+      const nextState = vote(initialState,'Jamal');
       expect(nextState).to.equal({
         vote:{
           pair:[
