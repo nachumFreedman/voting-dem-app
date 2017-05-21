@@ -23,7 +23,7 @@ describe('application logic', () => {
         });
         const nextState = vote(state, 'Jamal')
         expect(nextState).to.equal(
-          fromJS{
+          fromJS({
             vote:{
               pair:[
                 'Jamal',
@@ -33,27 +33,27 @@ describe('application logic', () => {
                 'Jamal':1
               }
             },
-            entries:[]
-          }
+            entries:[],
+          })
         );
       })
       it('adds to existing tally for the voted entry', () => {
         const initialState = fromJS({
-          vote::({
-            pair:(
+          vote:{
+            pair:[
               'Jamal',
               'Jaquan',
-            ),
-            tally:({
+            ],
+            tally:{
               'Jamal':3,
               'Jaquan':2,
-            })
-          }),
-          entries:[]
+            }
+          },
+          entries:[],
         })
       });
       const nextState = vote(state,'Jamal');
-      expect(nextState).to.equal{
+      expect(nextState).to.equal({
         vote:{
           pair:[
             'Jamal',
@@ -64,8 +64,8 @@ describe('application logic', () => {
             'Jaquan':2,
           }
         },
-        entries:[]
-      }
+        entries:[],
+      });
 
       it.skip('adds the entries to the state', () => {
         const initialState = fromJS({});
