@@ -13,16 +13,16 @@ describe('application logic', () => {
 
   describe( 'vote', () => {
 
-    it('crates a tally for the voted entry', () => {
+    it('creates a tally for the voted entry', () => {
       const initialState = fromJS({
         vote:{
           pair:[
             'Jamal',
             'Jaquan',
-          ]
+          ],
         },
-      })
-      const nextState = vote(initialState, 'Jamal')
+      });
+      const nextState = vote(initialState, 'Jamal');
       expect(nextState).to.equal(
         fromJS({
           vote:{
@@ -32,7 +32,7 @@ describe('application logic', () => {
             ],
             tally:{
               'Jamal':1
-            }
+            },
           },
           entries:[],
         })
@@ -52,9 +52,9 @@ describe('application logic', () => {
           }
         },
         entries:[],
-      })
+      });
       const nextState = vote(initialState,'Jamal');
-      expect(nextState).to.equal({
+      expect(nextState).to.equal(fromJS({
         vote:{
           pair:[
             'Jamal',
@@ -66,26 +66,26 @@ describe('application logic', () => {
           }
         },
         entries:[],
-      });
+      }));
+    });
+    it('adds the entries to the state', () => {
+      const initialState = fromJS({});
+      const niggers = fromJS(['Jamal', 'Jaquan']);
+      const nextState = setNiggers(initialState, niggers);
+      const expectedState = fromJS({ niggers: [ 'Jamal', 'Jaquan']});
 
-      it.skip('adds the entries to the state', () => {
-        const initialState = fromJS({});
-        const niggers = fromJS(['Jamal', 'Jaquan']);
-        const nextState = setNiggers(initialState, niggers);
-        const expectedState = fromJS({ niggers: [ 'Jamal', 'Jaquan']});
+      expect( nextState ).to.equal( expectedState );
+    });
 
-        expect( nextState ).to.equal( expectedState );
+    it('takes the next...',() => {
+      const initialState = fromJS({
+        niggers:['Jamal','Jaquan','Sunshine']
       });
-
-      it.skip('takes the next...',() => {
-        const initialState = fromJS({
-          niggers:['Jamal','Jaquan','Sunshine']
-        });
-        const nextState = next(initialState);
-        expect(nextState).to.equal(fromJS({
-          vote: {pair: [ 'Jamal','Jaquan' ]},
-          niggers: [ 'Sunshine' ]
-        }));
-      });
+      const nextState = next(initialState);
+      expect(nextState).to.equal(fromJS({
+        vote: {pair: [ 'Jamal','Jaquan' ]},
+        niggers: [ 'Sunshine' ]
+      }));
     });
   });
+});

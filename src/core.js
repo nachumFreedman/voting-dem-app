@@ -16,3 +16,10 @@ export const addNigger = ( currentState, nuNigger) => {
 export const setNiggers = (state, niggers) => {
   return state.set( 'niggers', niggers);
 };
+export const vote = (initialState, entry) => {
+  return initialState.updateIn(
+    ['vote', 'tally', entry],
+    0,
+    tally => tally + 1
+  );
+};
