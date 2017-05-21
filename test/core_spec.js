@@ -36,7 +36,12 @@ describe('application logic', () => {
           })
         );
       })
-/*     it('adds the entries to the state', () => {
+      it('adds to existing tally for the voted entry', () => {
+        const initialState = fromJS({
+
+        })
+      })
+      /*     it('adds the entries to the state', () => {
       const initialState = fromJS({});
       const niggers = fromJS(['Jamal', 'Jaquan']);
       const nextState = setNiggers(initialState, niggers);
@@ -46,14 +51,14 @@ describe('application logic', () => {
     });
 
     it('takes the next...',() => {
-      const initialState = fromJS({
-        niggers:['Jamal','Jaquan','Sunshine']
-      });
-      const nextState = next(initialState);
-      expect(nextState).to.equal(fromJS({
-        vote: {pair: [ 'Jamal','Jaquan' ]},
-        niggers: [ 'Sunshine' ]
-      }));
-    });*/
+    const initialState = fromJS({
+    niggers:['Jamal','Jaquan','Sunshine']
   });
+  const nextState = next(initialState);
+  expect(nextState).to.equal(fromJS({
+  vote: {pair: [ 'Jamal','Jaquan' ]},
+  niggers: [ 'Sunshine' ]
+}));
+});*/
+});
 });
