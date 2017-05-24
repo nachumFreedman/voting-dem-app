@@ -13,9 +13,11 @@ export const next = (initialState) => {
 export const addNigger = ( currentState, nuNigger) => {
   return currentState.update( 'niggers', niggers => niggers.push(nuNigger));
 };
+
 export const setNiggers = (state, niggers) => {
   return state.set( 'niggers', niggers);
 };
+
 export const vote = (initialState, entry) => {
   return initialState.updateIn(
     ['vote', 'tally', entry],

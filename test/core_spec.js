@@ -9,84 +9,108 @@ import {
 
 describe('application logic', () => {
 
-  // ..
+  describe('next', ()=> {
 
-  describe( 'vote', () => {
+    // ...
 
-    it('creates a tally for the voted entry', () => {
-      const initialState = fromJS({
+    it('puts winner of current vote back to entries', () => {
+      const state = fromJS({
         vote:{
-          pair:[
-            'Jamal',
-            'Jaquan',
-          ],
-          entries[],
+          pair: ['Trainspotting', '28 Days Later'],
+          tally: {
+            'Trainspotting': 4,
+            '28 Days Later': 2,
+          }
         },
+        console.log(tally.Trainspotting);
+        entries: ['Sunshine', 'Millions','127 Hours'],
       });
-      const nextState = vote(initialState, 'Jamal',);
+      const nextState = next(state);
       expect(nextState).to.equal(
         fromJS({
-          vote:{
-            pair:[
-              'Jamal',
-              'Jaquan',
-            ],
-            tally:{
-              'Jamal':1
-            },
+          vote: {
+            pair: ['Sunshine','Millions']
           },
-          entries:[],
-        })
-      );
-    });
-
-    it('adds to existing tally for the voted entry', () => {
-      const initialState = fromJS({
-        vote:{
-          pair:[
-            'Jamal',
-            'Jaquan',
-          ],
-          tally:{
-            'Jamal':3,
-            'Jaquan':2,
-          }
-        },
-        entries:[],
+          entries: ['127 Hours', 'Trainspotting'],
+        }));
       });
-      const nextState = vote(initialState,'Jamal');
-      expect(nextState).to.equal(fromJS({
-        vote:{
-          pair:[
-            'Jamal',
-            'Jaquan',
-          ],
-          tally:{
-            'Jamal':4,
-            'Jaquan':2,
-          }
-        },
-        entries:[],
-      }));
-    });
-    it('adds the entries to the state', () => {
-      const initialState = fromJS({});
-      const niggers = fromJS(['Jamal', 'Jaquan']);
-      const nextState = setNiggers(initialState, niggers);
-      const expectedState = fromJS({ niggers: [ 'Jamal', 'Jaquan']});
 
-      expect( nextState ).to.equal( expectedState );
-    });
+      describe( 'vote', () => {
 
-    it('takes the next...',() => {
-      const initialState = fromJS({
-        niggers:['Jamal','Jaquan','Sunshine']
+        it('creates a tally for the voted entry', () => {
+          const initialState = fromJS({
+            vote:{
+              pair:[
+                'Trainspotting',
+                '28 days later',
+              ],
+            },
+            entries:[],
+          });
+          const nextState = vote(initialState, 'Trainspotting',);
+          expect(nextState).to.equal(
+            fromJS({
+              vote:{
+                pair:[
+                  'Trainspotting',
+                  '28 Days Later',
+                ],
+                tally:{
+                  'Trainspotting':1
+                },
+              },
+              entries:[],
+            })
+          );
+        });
+
+        it('adds to existing tally for the voted entry', () => {
+          const initialState = fromJS({
+            vote:{
+              pair:[
+                'Trainspotting',
+                '28 Days Later',
+              ],
+              tally:{
+                'Trainspotting':3,
+                '28 Days Later':2,
+              }
+            },
+            entries:[],
+          });
+          const nextState = vote(initialState,'Trainspotting');
+          expect(nextState).to.equal(fromJS({
+            vote:{
+              pair:[
+                'Trainspotting',
+                '28 Days Later',
+              ],
+              tally:{
+                'Trainspotting':4,
+                '28 Days Later':2,
+              }
+            },
+            entries:[],
+          }));
+        });
+        it('adds the entries to the state', () => {
+          const initialState = fromJS({});
+          const niggers = fromJS(['Trainspotting', '28 Days Later']);
+          const nextState = setNiggers(initialState, niggers);
+          const expectedState = fromJS({ niggers: [ 'Trainspotting', '28 Days Later']});
+
+          expect( nextState ).to.equal( expectedState );
+        });
+
+        it('takes the next...',() => {
+          const initialState = fromJS({
+            niggers:['Trainspotting','28 Days Later','Sunshine']
+          });
+          const nextState = next(initialState);
+          expect(nextState).to.equal(fromJS({
+            vote: {pair: [ 'Trainspotting','28 Days Later' ]},
+            niggers: [ 'Sunshine' ]
+          }));
+        });
       });
-      const nextState = next(initialState);
-      expect(nextState).to.equal(fromJS({
-        vote: {pair: [ 'Jamal','Jaquan' ]},
-        niggers: [ 'Sunshine' ]
-      }));
     });
-  });
-});
