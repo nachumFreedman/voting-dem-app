@@ -6,13 +6,13 @@ describe('immutablity', () => {
   //...
 
   describe( 'A List', () => {
-    const addNigger = ( currentState, nuNigger ) =>
-    currentState.update( 'niggers', niggers => niggers.push(nuNigger));
+    const addMovies = ( currentState, nuMovies ) =>
+    currentState.update( 'movies', movies => movies.push(nuMovies));
 
     it('is immutable', () => {
-      const initialState = fromJS({ niggers: [ 'Jamal', 'Jaquan' ] });
-      const nextState = addNigger( initialState, 'Sunshine' );
-      const expectedState = fromJS({ niggers: ['Jamal','Jaquan','Sunshine' ]});
+      const initialState = fromJS({ movies: [ 'Jamal', 'Jaquan' ] });
+      const nextState = addMovies( initialState, 'Sunshine' );
+      const expectedState = fromJS({ movies: ['Jamal','Jaquan','Sunshine' ]});
 
       expect( nextState ).to.equal( expectedState );
     });

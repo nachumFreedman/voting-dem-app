@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { fromJS } from 'immutable';
 import {
-  addNigger,
-  setNiggers,
+  addMovies,
+  setMovies,
   next,
   vote,
 } from '../src/core'
@@ -22,7 +22,6 @@ describe('application logic', () => {
             '28 Days Later': 2,
           }
         },
-        console.log(tally.Trainspotting);
         entries: ['Sunshine', 'Millions','127 Hours'],
       });
       const nextState = next(state);
@@ -35,6 +34,26 @@ describe('application logic', () => {
         }));
       });
 
+      it('puts both from tied vote back to entries', () => {
+        const state = fromJS({
+          vote:{
+            pair: ['Trainspotting', '28 Days Later'],
+            tally:{
+              'Trainspotting': 3,
+              '28 Days Later': 3,
+            }
+          },
+          entries:['Sunshine', 'Millions', '127 Hours']
+        });
+        const nextState = next(state);
+        expect(nextState).to.equal(
+          fromJS({
+            vote:{
+              pair:['127 Hours', 'Trainspotting', '28 Days Later']
+            }
+          }));
+        });
+      });
       describe( 'vote', () => {
 
         it('creates a tally for the voted entry', () => {
@@ -42,7 +61,7 @@ describe('application logic', () => {
             vote:{
               pair:[
                 'Trainspotting',
-                '28 days later',
+                '28 Days Later',
               ],
             },
             entries:[],
@@ -95,21 +114,21 @@ describe('application logic', () => {
         });
         it('adds the entries to the state', () => {
           const initialState = fromJS({});
-          const niggers = fromJS(['Trainspotting', '28 Days Later']);
-          const nextState = setNiggers(initialState, niggers);
-          const expectedState = fromJS({ niggers: [ 'Trainspotting', '28 Days Later']});
+          const movies = fromJS(['Trainspotting', '28 Days Later']);
+          const nextState = setMovies(initialState, movies);
+          const expectedState = fromJS({ movies: [ 'Trainspotting', '28 Days Later']});
 
           expect( nextState ).to.equal( expectedState );
         });
 
         it('takes the next...',() => {
           const initialState = fromJS({
-            niggers:['Trainspotting','28 Days Later','Sunshine']
+            movies:['Trainspotting','28 Days Later','Sunshine']
           });
           const nextState = next(initialState);
           expect(nextState).to.equal(fromJS({
             vote: {pair: [ 'Trainspotting','28 Days Later' ]},
-            niggers: [ 'Sunshine' ]
+            movies: [ 'Sunshine' ]
           }));
         });
       });
