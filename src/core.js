@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-
+// import { } from '..test/core_spec.js'
 // ...
 function getWinners(vote) {
   if(!vote) return [];
@@ -11,17 +11,12 @@ function getWinners(vote) {
   else                      return [a, b];
 };
 
-export const next = (state, initialState) => {
-  const entries = state.get('entries').concat(getWinners(state.get(vote)));
+export function next(state) {
+  const movies = state.get('movies').concat(getWinners(state.get('vote')));
   return state.merge({
-    vote:fromJS({pair: entries.take(2)}),
-    entries: entries.skip(2)
-  });
-  const movies = initialState.get('movies');
-  return initialState.merge({
     vote: fromJS({pair: movies.take(2)}),
     movies: movies.skip(2)
-  });
+  })
 };
 
 export const addMovies = ( currentState, nuMovies) => {

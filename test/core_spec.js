@@ -15,7 +15,7 @@ describe('application logic', () => {
 
     it('puts winner of current vote back to entries', () => {
       const state = fromJS({
-        vote:{
+        vote: {
           pair: ['Trainspotting', '28 Days Later'],
           tally: {
             'Trainspotting': 4,
@@ -24,6 +24,7 @@ describe('application logic', () => {
         },
         entries: ['Sunshine', 'Millions','127 Hours'],
       });
+
       const nextState = next(state);
       expect(nextState).to.equal(
         fromJS({
@@ -45,6 +46,7 @@ describe('application logic', () => {
           },
           entries:['Sunshine', 'Millions', '127 Hours']
         });
+
         const nextState = next(state);
         expect(nextState).to.equal(
           fromJS({
@@ -54,6 +56,7 @@ describe('application logic', () => {
           }));
         });
       });
+
       describe( 'vote', () => {
 
         it('creates a tally for the voted entry', () => {
@@ -66,6 +69,7 @@ describe('application logic', () => {
             },
             entries:[],
           });
+
           const nextState = vote(initialState, 'Trainspotting',);
           expect(nextState).to.equal(
             fromJS({
@@ -97,6 +101,7 @@ describe('application logic', () => {
             },
             entries:[],
           });
+
           const nextState = vote(initialState,'Trainspotting');
           expect(nextState).to.equal(fromJS({
             vote:{
@@ -112,6 +117,7 @@ describe('application logic', () => {
             entries:[],
           }));
         });
+
         it('adds the entries to the state', () => {
           const initialState = fromJS({});
           const movies = fromJS(['Trainspotting', '28 Days Later']);
