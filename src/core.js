@@ -18,7 +18,7 @@ export function next(state) {
     vote: fromJS({pair: entries.take(2)}),
     entries: entries.skip(2)
   });
-}; 
+};
 
 export const addMovies = ( currentState, nuMovies) => {
   return currentState.update( 'movies', movies => movies.push(nuMovies));

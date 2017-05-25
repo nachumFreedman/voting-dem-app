@@ -126,16 +126,18 @@ describe('application logic', () => {
           const expectedState = fromJS({ movies: [ 'Trainspotting', '28 Days Later']});
 
           expect( nextState ).to.equal( expectedState );
-        }); 
+        });
 
         it('takes the next...',() => {
           const initialState = fromJS({
-            movies:['Trainspotting','28 Days Later','Sunshine']
+            entries:['Trainspotting','28 Days Later','Sunshine']
           });
           const nextState = next(initialState);
           expect(nextState).to.equal(fromJS({
-            vote: {pair: [ 'Trainspotting','28 Days Later' ]},
-            movies: [ 'Sunshine' ]
+            vote:{
+              pair:[ 'Trainspotting','28 Days Later' ]
+            },
+            entries: [ 'Sunshine' ]
           }));
         });
       });
