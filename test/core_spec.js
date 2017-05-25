@@ -13,6 +13,23 @@ describe('application logic', () => {
 
     // ...
 
+    it('marks winner when just ine entry left', () => {
+      const state = fromJS({
+        vote: {
+          pair: [ 'Trainspotting', '28 Days Later' ],
+          tally: {
+            'Trainspotting': 4,
+            '28 Days Later': 2,
+          }
+        },
+        entries:[]
+      })
+      const nextState = next(state);
+      expect(nextState).to.equal(fromJS({
+        winner: 'Trainspotting'
+      }));
+    });
+
     it('puts winner of current vote back to entries', () => {
       const state = fromJS({
         vote: {
@@ -56,7 +73,7 @@ describe('application logic', () => {
             entries: ['127 Hours', 'Trainspotting', '28 Days Later']
           }));
         });
-      });
+      }); //describe('next')
 
       describe( 'vote', () => {
 
@@ -140,5 +157,5 @@ describe('application logic', () => {
             entries: [ 'Sunshine' ]
           }));
         });
-      });
-    });
+      }); //   describe( 'vote' )
+    }); // describe( 'application logic' )
