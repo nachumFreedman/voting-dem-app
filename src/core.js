@@ -12,10 +12,11 @@ function getWinners(vote) {
 };
 
 export function next(state) {
-  const movies = state.get('movies').concat(getWinners(state.get('vote')));
+  const entries  = state
+                .get('entries').concat(getWinners(state.get('vote')));
   return state.merge({
-    vote: fromJS({pair: movies.take(2)}),
-    movies: movies.skip(2)
+    vote: fromJS({pair: entries.take(2)}),
+    entries: entries.skip(2)
   })
 };
 

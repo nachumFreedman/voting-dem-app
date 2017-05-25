@@ -51,8 +51,9 @@ describe('application logic', () => {
         expect(nextState).to.equal(
           fromJS({
             vote:{
-              pair:['127 Hours', 'Trainspotting', '28 Days Later']
-            }
+              pair:['Sunshine', 'Millions']
+            },
+            entries: ['127 Hours', 'Trainspotting', '28 Days Later']
           }));
         });
       });
