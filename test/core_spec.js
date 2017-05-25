@@ -126,7 +126,7 @@ describe('application logic', () => {
           const expectedState = fromJS({ movies: [ 'Trainspotting', '28 Days Later']});
 
           expect( nextState ).to.equal( expectedState );
-        });
+        }); 
 
         it('takes the next...',() => {
           const initialState = fromJS({
