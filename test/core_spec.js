@@ -145,7 +145,7 @@ describe('application logic', () => {
           expect( nextState ).to.equal( expectedState );
         });
 
-        it('takes the next...',() => {
+        it('takes the next two entries under vote',() => {
           const initialState = fromJS({
             entries:['Trainspotting','28 Days Later','Sunshine']
           });
