@@ -1,6 +1,8 @@
 import { fromJS } from 'immutable';
 // import { } from '..test/core_spec.js'
+
 // ...
+
 function getWinners(vote) {
   if(!vote) return [];
   const [a, b] = vote.get('pair');
@@ -30,7 +32,7 @@ export const addMovies = ( currentState, nuMovies) => {
 };
 
 export const setMovies = (state, movies) => {
-  return state.set( 'movies', movies);
+  return state.set( 'movies', fromJS(movies));
 };
 
 export const vote = (initialState, entry) => {
