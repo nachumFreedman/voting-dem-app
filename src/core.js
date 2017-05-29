@@ -3,6 +3,8 @@ import { fromJS } from 'immutable';
 
 // ...
 
+export const INITIAL_STATE = fromJS({});
+
 function getWinners(vote) {
   if(!vote) return [];
   const [a, b] = vote.get('pair');
@@ -14,15 +16,15 @@ function getWinners(vote) {
 };
 
 export function next(state) {
-  const entries  = state.get('entries').concat(getWinners(state.get('vote')));
-  if (entries.size === 1){
+  const movies  = state.get('movies').concat(getWinners(state.get('vote')));
+  if (movies.size === 1){
     return state.remove('vote')
-    .remove('entries')
-    .set('winner', entries.first())
+    .remove('movies')
+    .set('winner', movies.first())
   } else {
     return state.merge({
-      vote: fromJS({pair: entries.take(2)}),
-      entries: entries.skip(2)
+      vote: fromJS({pair: movies.take(2)}),
+      movies: movies.skip(2)
     });
   }
 };

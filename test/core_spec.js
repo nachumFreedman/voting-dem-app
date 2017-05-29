@@ -16,13 +16,13 @@ describe('application logic', () => {
     it('marks winner when just ine entry left', () => {
       const state = fromJS({
         vote: {
-          pair: [ 'Trainspotting', '28 Days Later' ],
+          pair: fromJS[ 'Trainspotting', '28 Days Later' ],
           tally: {
             'Trainspotting': 4,
             '28 Days Later': 2,
           }
         },
-        entries:[]
+        movies:[]
       })
       const nextState = next(state);
       expect(nextState).to.equal(fromJS({
@@ -30,7 +30,7 @@ describe('application logic', () => {
       }));
     });
 
-    it('puts winner of current vote back to entries', () => {
+    it('puts winner of current vote back to movies', () => {
       const state = fromJS({
         vote: {
           pair: ['Trainspotting', '28 Days Later'],
@@ -39,7 +39,7 @@ describe('application logic', () => {
             '28 Days Later': 2,
           }
         },
-        entries: ['Sunshine', 'Millions','127 Hours'],
+        movies: ['Sunshine', 'Millions','127 Hours'],
       });
 
       const nextState = next(state);
@@ -48,11 +48,11 @@ describe('application logic', () => {
           vote: {
             pair: ['Sunshine','Millions']
           },
-          entries: ['127 Hours', 'Trainspotting'],
+          movies: ['127 Hours', 'Trainspotting'],
         }));
       });
 
-      it('puts both from tied vote back to entries', () => {
+      it('puts both from tied vote back to movies', () => {
         const state = fromJS({
           vote:{
             pair: ['Trainspotting', '28 Days Later'],
@@ -61,7 +61,7 @@ describe('application logic', () => {
               '28 Days Later': 3,
             }
           },
-          entries:['Sunshine', 'Millions', '127 Hours']
+          movies:['Sunshine', 'Millions', '127 Hours']
         });
 
         const nextState = next(state);
@@ -70,7 +70,7 @@ describe('application logic', () => {
             vote:{
               pair:['Sunshine', 'Millions']
             },
-            entries: ['127 Hours', 'Trainspotting', '28 Days Later']
+            movies: ['127 Hours', 'Trainspotting', '28 Days Later']
           }));
         });
       }); //describe('next')
@@ -85,7 +85,7 @@ describe('application logic', () => {
                 '28 Days Later',
               ],
             },
-            entries:[],
+            movies:[],
           });
 
           const nextState = vote(initialState, 'Trainspotting',);
@@ -100,7 +100,7 @@ describe('application logic', () => {
                   'Trainspotting':1
                 },
               },
-              entries:[],
+              movies:[],
             })
           );
         });
@@ -117,7 +117,7 @@ describe('application logic', () => {
                 '28 Days Later':2,
               }
             },
-            entries:[],
+            movies:[],
           });
 
           const nextState = vote(initialState,'Trainspotting');
@@ -132,11 +132,11 @@ describe('application logic', () => {
                 '28 Days Later':2,
               }
             },
-            entries:[],
+            movies:[],
           }));
         });
 
-        it('adds the entries to the state', () => {
+        it('adds the movies to the state', () => {
           const initialState = fromJS({});
           const movies = fromJS(['Trainspotting', '28 Days Later']);
           const nextState = setMovies(initialState, movies);
@@ -145,16 +145,16 @@ describe('application logic', () => {
           expect( nextState ).to.equal( expectedState );
         });
 
-        it('takes the next two entries under vote',() => {
+        it('takes the next two movies under vote',() => {
           const initialState = fromJS({
-            entries:['Trainspotting','28 Days Later','Sunshine']
+            movies:['Trainspotting','28 Days Later','Sunshine']
           });
           const nextState = next(initialState);
           expect(nextState).to.equal(fromJS({
             vote:{
               pair:[ 'Trainspotting','28 Days Later' ]
             },
-            entries: [ 'Sunshine' ]
+            movies: [ 'Sunshine' ]
           }));
         });
       }); //   describe( 'vote' )

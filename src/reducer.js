@@ -1,9 +1,9 @@
-import {setMovies, next, vote} from './core';
+import {setMovies, next, vote, INITIAL_STATE} from './core';
 
-export default function reducer(state, action){
+export default function reducer(state = INITIAL_STATE, action){
   switch (action.type) {
     case 'SET_MOVIES':
-    return setMovies(state, action.entries);
+    return setMovies(state, action.movies);
     case 'NEXT':
     return next(state);
     case 'VOTE':

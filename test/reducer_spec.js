@@ -4,9 +4,36 @@ import {expect} from 'chai';
 import reducer from '../src/reducer'
 
 describe('reducer', ()=> {
+
+  //...
+
+  it('can be used with reduce', () => {
+    const actions = [
+      {type: 'SET_MOVIES', movies: ['Trainspotting', '28 Days Later']},
+      {type: 'NEXT'},
+      {type: 'VOTE', entry: 'Trainspotting'},
+      {type: 'VOTE', entry: '28 Days Later'},
+      {type: 'VOTE', entry: 'Trainspotting'},
+      {type: 'NEXT'}
+    ];
+    const finalState = actions.reduce(reducer, fromJS());
+    const expectedState = fromJS({winner: 'Trainspotting'})
+
+    expect(finalState).to.equal(expectedState);
+  })
+
+  it('has an initial state', ()=> {
+    const action = {type: 'SET_MOVIES', movies:['Trainspotting']};
+    const nextState = reducer(undefined, action);
+    const expectedState = fromJS({
+      movies:['Trainspotting']
+    })
+    expect(nextState).to.equal(expectedState)
+  });
+
   it('handles SET_MOVIES', () => {
     const initialState = fromJS({});
-    const action = {type: 'SET_MOVIES', entries: ['Trainspotting']};
+    const action = {type: 'SET_MOVIES', movies: ['Trainspotting']};
     const nextState = reducer(initialState, action);
     const expectedState = fromJS({movies: ['Trainspotting']});
 
@@ -15,7 +42,7 @@ describe('reducer', ()=> {
 
   it('handles NEXT', () => {
     const initialState = fromJS({
-      entries: ['Trainspotting', '28 Days Later']
+      movies: ['Trainspotting', '28 Days Later']
     });
     const action = {type: 'NEXT'};
     const nextState = reducer(initialState, action);
@@ -25,7 +52,7 @@ describe('reducer', ()=> {
           'Trainspotting', '28 Days Later'
         ]
       },
-      entries: []
+      movies: []
     });
     expect(nextState).to.equal(expectedState);
   });
@@ -34,7 +61,7 @@ describe('reducer', ()=> {
       vote: {
         pair: ['Trainspotting', '28 Days Later']
       },
-      entries: []
+      movies: []
     });
     const action = {type: 'VOTE', entry: 'Trainspotting'};
     const nextState = reducer(initialState, action);
@@ -45,7 +72,7 @@ describe('reducer', ()=> {
         ],
         tally: {Trainspotting: 1}
       },
-      entries: []
+      movies: []
     });
     expect(nextState).to.equal(expectedState);
   });
