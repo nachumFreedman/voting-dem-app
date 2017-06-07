@@ -13,10 +13,10 @@ describe('application logic', () => {
 
     // ...
 
-    it('marks winner when just ine entry left', () => {
+    it('marks winner when just one entry left', () => {
       const state = fromJS({
         vote: {
-          pair: fromJS[ 'Trainspotting', '28 Days Later' ],
+          pair: [ 'Trainspotting', '28 Days Later' ],
           tally: {
             'Trainspotting': 4,
             '28 Days Later': 2,
