@@ -3,6 +3,13 @@ import { fromJS } from 'immutable';
 
 // ...
 
+export function vote(voteState, entry) {
+  return voteState.updateIn(
+    ['tally', entry],
+    0,
+    tally => tally + 1
+  );
+};
 export const INITIAL_STATE = fromJS({});
 
 function getWinners(vote) {
@@ -35,12 +42,4 @@ export const addMovies = ( currentState, nuMovies) => {
 
 export const setMovies = (state, movies) => {
   return state.set( 'movies', fromJS(movies));
-};
-
-export const vote = (initialState, entry) => {
-  return initialState.updateIn(
-    ['vote', 'tally', entry],
-    0,
-    tally => tally + 1
-  );
 };

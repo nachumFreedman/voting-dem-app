@@ -79,60 +79,33 @@ describe('application logic', () => {
 
         it('creates a tally for the voted entry', () => {
           const initialState = fromJS({
-            vote:{
-              pair:[
-                'Trainspotting',
-                '28 Days Later',
-              ],
-            },
-            movies:[],
-          });
-
-          const nextState = vote(initialState, 'Trainspotting',);
-          expect(nextState).to.equal(
-            fromJS({
-              vote:{
-                pair:[
-                  'Trainspotting',
-                  '28 Days Later',
-                ],
-                tally:{
-                  'Trainspotting':1
-                },
-              },
-              movies:[],
+            pair: ['Trainspotting', '28 Days Later']
+          })
+          const nextState = vote(initialState, 'Trainspotting')
+          const expectedState = fromJS({
+            pair: ['Trainspotting', '28 Days Later'],
+            tally: ({
+              'Trainspotting': 1
             })
-          );
+          });
+          expect(nextState).to.equal(expectedState)
         });
 
         it('adds to existing tally for the voted entry', () => {
-          const initialState = fromJS({
-            vote:{
-              pair:[
-                'Trainspotting',
-                '28 Days Later',
-              ],
-              tally:{
-                'Trainspotting':3,
-                '28 Days Later':2,
-              }
-            },
-            movies:[],
+          const state = fromJS({
+            pair: ['Trainspotting', '28 Days Later'],
+            tally: {
+              'Trainspotting': 3,
+              '28 Days Later': 2,
+            }
           });
-
-          const nextState = vote(initialState,'Trainspotting');
+          const nextState = vote(state, 'Trainspotting');
           expect(nextState).to.equal(fromJS({
-            vote:{
-              pair:[
-                'Trainspotting',
-                '28 Days Later',
-              ],
-              tally:{
-                'Trainspotting':4,
-                '28 Days Later':2,
-              }
-            },
-            movies:[],
+            pair: ['Trainspotting', '28 Days Later'],
+            tally: {
+              'Trainspotting': 4,
+              '28 Days Later': 2,
+            }
           }));
         });
 
