@@ -12,7 +12,7 @@ describe('store', () => {
       type: 'SET_MOVIES',
       movies: ['Trainspotting', '28 Days Later']
     });
-    const nextMovies = from({movies: ['Trainspotting', '28 Days Later']});
+    const nextMovies = fromJS({movies: ['Trainspotting', '28 Days Later']});
     expect(store.getState()).to.equal(nextMovies);
   });
 })//describe('store')
